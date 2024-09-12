@@ -14,14 +14,14 @@ function build_drogon() {
 
     #The folder in which we will build drogon
     build_dir='./build'
-    if [ -d $build_dir ]; then
-        echo "Deleted folder: ${build_dir}"
-        rm -rf $build_dir
-    fi
+    #if [ -d $build_dir ]; then
+    #    echo "Deleted folder: ${build_dir}"
+    #    rm -rf $build_dir
+    #fi
 
     #Create building folder
     echo "Created building folder: ${build_dir}"
-    mkdir $build_dir
+    mkdir -p $build_dir
 
     echo "Entering folder: ${build_dir}"
     cd $build_dir

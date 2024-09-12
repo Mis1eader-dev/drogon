@@ -1,5 +1,23 @@
 cmake_minimum_required(VERSION 3.5)
 
+# Options
+
+set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
+set(BUILD_CTL OFF)
+set(BUILD_EXAMPLES OFF)
+set(BUILD_ORM OFF)
+set(COZ_PROFILING OFF)
+set(BUILD_DOC OFF)
+set(BUILD_POSTGRESQL OFF)
+set(BUILD_MYSQL OFF)
+set(BUILD_SQLITE OFF)
+set(BUILD_REDIS OFF)
+set(BUILD_BROTLI ON)
+set(BUILD_YAML_CONFIG OFF)
+set(USE_SUBMODULE ON)
+set(BUILD_SHARED_LIBS OFF)
+set(CMAKE_BUILD_TYPE Release)
+
 project(drogon)
 
 message(STATUS "compiler: " ${CMAKE_CXX_COMPILER_ID})
@@ -854,3 +872,23 @@ if(DOXYGEN_FOUND)
 endif(DOXYGEN_FOUND)
 
 include(cmake/Packages.cmake)
+
+project(
+	match_bug_example
+	LANGUAGES CXX
+	VERSION 1.0.0
+)
+
+add_executable(${PROJECT_NAME} main.cpp)
+
+set_target_properties(${PROJECT_NAME}
+	PROPERTIES
+	CXX_STANDARD 20
+	CXX_EXTENSIONS OFF
+)
+
+target_link_libraries(${PROJECT_NAME} PUBLIC drogon)
+
+target_include_directories(${PROJECT_NAME} PUBLIC
+	$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/inc>
+)
